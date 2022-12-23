@@ -1,47 +1,50 @@
-import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+import React, { useState, useEffect } from "react"
+import { Link, useNavigate } from "react-router-dom"
+import axios from "axios"
 
 function Login() {
-  var token = localStorage.getItem("token");
+  var token = localStorage.getItem("token")
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   useEffect(() => {
     if (token) {
-      navigate("/");
+      navigate("/")
     }
-  }, []);
-  const [loginData, setLoginData] = useState({ username: "", password: "" });
+  }, [])
+  const [loginData, setLoginData] = useState({ username: "", password: "" })
 
   function onChangeFunc(event) {
     if (event.target.name === "username") {
       setLoginData({
         username: event.target.value,
         password: loginData.password,
-      });
+      })
     } else {
       setLoginData({
         username: loginData.username,
         password: event.target.value,
-      });
+      })
     }
   }
 
   function HandleLogin(event) {
     axios
-      .post("http://localhost:3001/login", loginData)
+      .post(
+        "http://ec2-3-212-156-138.compute-1.amazonaws.com:3001/login",
+        loginData
+      )
       .then(function (response) {
-        console.log("successfully logged in");
-        var token = response.data;
-        localStorage.setItem("token", JSON.stringify(token));
-        navigate("/");
+        console.log("successfully logged in")
+        var token = response.data
+        localStorage.setItem("token", JSON.stringify(token))
+        navigate("/")
       })
       .catch(function (error) {
-        console.log("Did you ddddd");
-        console.log("login error: ", error);
-      });
+        console.log("Did you ddddd")
+        console.log("login error: ", error)
+      })
 
-    event.preventDefault();
+    event.preventDefault()
   }
 
   return (
@@ -67,7 +70,7 @@ function Login() {
       <p>Don't have an account? </p>
       <Link to="/registration">Sign up</Link>
     </div>
-  );
+  )
 }
 
-export default Login;
+export default Login

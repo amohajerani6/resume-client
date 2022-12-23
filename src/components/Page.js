@@ -6,7 +6,11 @@ function Page() {
   return (
     <div>
       <iframe
-        src={"http://localhost:3001/" + page + "#view=fitH"}
+        src={
+          "http://ec2-3-212-156-138.compute-1.amazonaws.com:3001/" +
+          page +
+          "#view=fitH"
+        }
         width="100%"
         height={1000}
         margin={0}

@@ -7,9 +7,12 @@ function Logout() {
   const navigate = useNavigate()
   const LogOutAction = async () => {
     var userInfo = JSON.parse(localStorage.getItem("token"))
-    await axiosJWT.post("http://localhost:3001/logout", {
-      refreshToken: userInfo.refreshToken,
-    })
+    await axiosJWT.post(
+      "http://ec2-3-212-156-138.compute-1.amazonaws.com:3001/logout",
+      {
+        refreshToken: userInfo.refreshToken,
+      }
+    )
     localStorage.removeItem("token")
 
     navigate("/login", { replace: true })

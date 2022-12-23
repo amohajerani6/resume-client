@@ -36,7 +36,10 @@ function Register() {
 
   function handleRegistration(event) {
     axios
-      .post("http://localhost:3001/register", loginData)
+      .post(
+        "http://ec2-3-212-156-138.compute-1.amazonaws.com:3001/register",
+        loginData
+      )
       .then(function (response) {
         if (response.data.registered) {
           navigate("/login")
