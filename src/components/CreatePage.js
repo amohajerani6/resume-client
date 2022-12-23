@@ -15,34 +15,6 @@ function CreatePage() {
     setPageName(event.target.value)
   }
 
-  function handleCreate(event) {
-    axiosJWT
-      .post(
-        "http://ec2-3-212-156-138.compute-1.amazonaws.com:3001/create-page",
-        {
-          page: pageName,
-        },
-        {
-          headers: {
-            authorization: "Bearer " + userInfo.token,
-            "content-type": "multipart/form-data",
-          },
-        }
-      )
-      .then(function (response) {
-        if (response.data.created) {
-          navigate("/")
-        } else {
-          alert("try again")
-        }
-      })
-      .catch(function (error) {
-        console.log(error)
-      })
-
-    event.preventDefault()
-  }
-
   const onSubmit = async (data) => {
     const formData = new FormData()
     formData.append("file", data.file[0])
