@@ -29,10 +29,7 @@ function Login() {
 
   function HandleLogin(event) {
     axios
-      .post(
-        "http://ec2-3-212-156-138.compute-1.amazonaws.com:3001/login",
-        loginData
-      )
+      .post("https://api.thegagali.com/login", loginData)
       .then(function (response) {
         console.log("successfully logged in")
         var token = response.data

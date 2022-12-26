@@ -9,12 +9,9 @@ function Home() {
   var userInfo = JSON.parse(localStorage.getItem("token"))
   useEffect(() => {
     async function fetchData() {
-      const res = await axiosJWT.get(
-        "http://ec2-3-212-156-138.compute-1.amazonaws.com:3001/",
-        {
-          headers: { authorization: "Bearer " + userInfo.token },
-        }
-      )
+      const res = await axiosJWT.get("https://api.thegagali.com/", {
+        headers: { authorization: "Bearer " + userInfo.token },
+      })
       setPages(res.data)
     }
     fetchData()

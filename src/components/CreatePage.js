@@ -21,16 +21,12 @@ function CreatePage() {
     formData.append("page", pageName)
     console.log("formData ", formData)
     axiosJWT
-      .post(
-        "http://ec2-3-212-156-138.compute-1.amazonaws.com:3001/create-page",
-        formData,
-        {
-          headers: {
-            authorization: "Bearer " + userInfo.token,
-            "Content-type": "multipart/form-data",
-          },
-        }
-      )
+      .post("https://api.thegagali.com/create-page", formData, {
+        headers: {
+          authorization: "Bearer " + userInfo.token,
+          "Content-type": "multipart/form-data",
+        },
+      })
       .then(function (response) {
         if (response.data.created) {
           navigate("/")

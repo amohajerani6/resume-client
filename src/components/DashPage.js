@@ -11,12 +11,9 @@ function DashPage() {
   const [pageTraffic, setPageTraffic] = useState([])
   useEffect(() => {
     async function fetchData() {
-      const res = await axiosJWT.get(
-        "http://ec2-3-212-156-138.compute-1.amazonaws.com:3001/dash/" + page,
-        {
-          headers: { authorization: "Bearer " + userInfo.token },
-        }
-      )
+      const res = await axiosJWT.get("https://api.thegagali.com/dash/" + page, {
+        headers: { authorization: "Bearer " + userInfo.token },
+      })
       setPageTraffic(res.data.traffic)
     }
     fetchData()
@@ -29,16 +26,12 @@ function DashPage() {
     formData.append("file", data.file[0])
     formData.append("page", page)
     axiosJWT
-      .post(
-        "http://ec2-3-212-156-138.compute-1.amazonaws.com:3001/create-page",
-        formData,
-        {
-          headers: {
-            authorization: "Bearer " + userInfo.token,
-            "Content-type": "multipart/form-data",
-          },
-        }
-      )
+      .post("https://api.thegagali.com/create-page", formData, {
+        headers: {
+          authorization: "Bearer " + userInfo.token,
+          "Content-type": "multipart/form-data",
+        },
+      })
       .then(function (response) {
         if (response.data.created) {
           navigate("/")
@@ -53,14 +46,11 @@ function DashPage() {
   function DeletePage() {
     if (window.confirm("Do you really want to leave?")) {
       axiosJWT
-        .delete(
-          "http://ec2-3-212-156-138.compute-1.amazonaws.com:3001/dash/" + page,
-          {
-            headers: {
-              authorization: "Bearer " + userInfo.token,
-            },
-          }
-        )
+        .delete("https://api.thegagali.com/dash/" + page, {
+          headers: {
+            authorization: "Bearer " + userInfo.token,
+          },
+        })
         .then(function (response) {
           navigate("/")
         })
