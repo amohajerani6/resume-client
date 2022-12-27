@@ -61,10 +61,8 @@ function DashPage() {
   }
   const trafficInfo = pageTraffic.map((item) => (
     <li key={item["_id"]}>
-      {"ts: " +
-        item["ts"] +
-        ", time: " +
-        Date(item["ts"]) +
+      {"time: " +
+        new Date(item["ts"]) +
         ", IP: " +
         item["query"] +
         ", Country: " +
