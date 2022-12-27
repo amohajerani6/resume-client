@@ -60,7 +60,7 @@ function DashPage() {
     }
   }
   const trafficInfo = pageTraffic.map((item) => (
-    <li key={item["_id"]}>
+    <tr key={item["_id"]}>
       {"time: " +
         new Date(item["ts"]) +
         ", IP: " +
@@ -69,7 +69,7 @@ function DashPage() {
         item["country"] +
         ", City:   " +
         item["city"]}
-    </li>
+    </tr>
   ))
   return (
     <div>
@@ -89,7 +89,7 @@ function DashPage() {
         </li>
       </ul>
       <h3>Traffic</h3>
-      <ul>{trafficInfo}</ul>
+      <table>{trafficInfo}</table>
     </div>
   )
 }
