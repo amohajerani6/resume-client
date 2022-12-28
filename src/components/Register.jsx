@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
-import axios from "axios"
+import axios from "../api/axios"
 
 function Register() {
   // If already has a token, go to  Home
@@ -36,7 +36,7 @@ function Register() {
 
   function handleRegistration(event) {
     axios
-      .post("https://api.thegagali.com/register", loginData)
+      .post("/register", loginData)
       .then(function (response) {
         if (response.data.registered) {
           navigate("/login")

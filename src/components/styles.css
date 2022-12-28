@@ -1,0 +1,27 @@
+
+  header {
+    background-color: #f5ba13;
+    margin: auto -16px;
+    padding: 1px 32px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+  }
+  
+  header h1 {
+    color: rgb(245, 237, 237);
+    font-family: "McLaren", cursive;
+    font-weight: 200;
+  }
+.logo {height: 50px;
+    width: 50px;}
+
+    .logOutbutton {
+        text-align: left;
+        margin: 0%;
+        background-color: #eee;
+        box-shadow:none
+      }

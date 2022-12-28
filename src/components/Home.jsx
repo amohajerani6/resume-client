@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
-import Logout from "./Logout"
-import axios from "axios"
+import Header from "./Header"
+import axios from "../api/axios"
 
-const axiosJWT = axios.create()
 function Home() {
   const [pages, setPages] = useState(["1", "2", "3"])
   var userInfo = JSON.parse(localStorage.getItem("token"))
   useEffect(() => {
     async function fetchData() {
-      const res = await axiosJWT.get("https://api.thegagali.com/", {
+      const res = await axios.get("", {
         headers: { authorization: "Bearer " + userInfo.token },
       })
       setPages(res.data)
@@ -19,7 +18,7 @@ function Home() {
 
   return (
     <div>
-      <Logout />
+      <Header />
       <h1>Welcome home</h1>
       <Link to="/createpage">Create a new page</Link>
       <h1>Existing pages</h1>

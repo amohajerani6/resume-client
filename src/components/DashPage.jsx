@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react"
 import { useParams, useNavigate, Link } from "react-router-dom"
-import Logout from "./Logout"
 import { useForm } from "react-hook-form"
-import axios from "axios"
-const axiosJWT = axios.create()
+import axios from "../api/axios"
+import TrafficTable from "./TrafficTable"
+import Header from "./Header"
 function DashPage() {
   const { register, handleSubmit } = useForm()
   var userInfo = JSON.parse(localStorage.getItem("token"))
@@ -11,7 +11,7 @@ function DashPage() {
   const [pageTraffic, setPageTraffic] = useState([])
   useEffect(() => {
     async function fetchData() {
-      const res = await axiosJWT.get("https://api.thegagali.com/dash/" + page, {
+      const res = await axios.get("/dash/" + page, {
         headers: { authorization: "Bearer " + userInfo.token },
       })
       setPageTraffic(res.data.traffic)
@@ -25,8 +25,8 @@ function DashPage() {
     const formData = new FormData()
     formData.append("file", data.file[0])
     formData.append("page", page)
-    axiosJWT
-      .post("https://api.thegagali.com/create-page", formData, {
+    axios
+      .post("/create-page", formData, {
         headers: {
           authorization: "Bearer " + userInfo.token,
           "Content-type": "multipart/form-data",
@@ -45,8 +45,8 @@ function DashPage() {
   }
   function DeletePage() {
     if (window.confirm("Do you really want to leave?")) {
-      axiosJWT
-        .delete("https://api.thegagali.com/dash/" + page, {
+      axios
+        .delete("/dash/" + page, {
           headers: {
             authorization: "Bearer " + userInfo.token,
           },
@@ -59,24 +59,11 @@ function DashPage() {
         })
     }
   }
-  const trafficInfo = pageTraffic.map((item) => (
-    <tr key={item["_id"]}>
-      {"time: " +
-        new Date(item["ts"]) +
-        ", IP: " +
-        item["query"] +
-        ", Country: " +
-        item["country"] +
-        ", City:   " +
-        item["city"]}
-    </tr>
-  ))
+
   return (
     <div>
+      <Header />
       <ul>
-        <li>
-          <Logout navigate />
-        </li>
         <li>
           <Link to={publicPage}>See the page</Link>
         </li>
@@ -89,7 +76,7 @@ function DashPage() {
         </li>
       </ul>
       <h3>Traffic</h3>
-      <table>{trafficInfo}</table>
+      <TrafficTable data={pageTraffic}></TrafficTable>
     </div>
   )
 }

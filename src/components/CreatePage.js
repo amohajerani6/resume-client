@@ -1,9 +1,8 @@
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useForm } from "react-hook-form"
-import Logout from "./Logout"
-import axios from "axios"
-const axiosJWT = axios.create()
+import axios from "../api/axios"
+import Header from "./Header"
 
 function CreatePage() {
   const navigate = useNavigate()
@@ -20,8 +19,8 @@ function CreatePage() {
     formData.append("file", data.file[0])
     formData.append("page", pageName)
     console.log("formData ", formData)
-    axiosJWT
-      .post("https://api.thegagali.com/create-page", formData, {
+    axios
+      .post("/create-page", formData, {
         headers: {
           authorization: "Bearer " + userInfo.token,
           "Content-type": "multipart/form-data",
@@ -40,8 +39,8 @@ function CreatePage() {
   }
   return (
     <>
-      <div className="loginPage">
-        <Logout />
+      <div>
+        <Header />
         <h1>Create page</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
           <input

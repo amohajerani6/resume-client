@@ -1,13 +1,13 @@
 import React from "react"
 import { useNavigate } from "react-router-dom"
-import axios from "axios"
-const axiosJWT = axios.create()
+import axios from "../api/axios"
+import "./styles.css"
 
 function Logout() {
   const navigate = useNavigate()
   const LogOutAction = async () => {
     var userInfo = JSON.parse(localStorage.getItem("token"))
-    await axiosJWT.post("https://api.thegagali.com/logout", {
+    await axios.post("/logout", {
       refreshToken: userInfo.refreshToken,
     })
     localStorage.removeItem("token")
@@ -16,7 +16,9 @@ function Logout() {
   }
   return (
     <div>
-      <button onClick={LogOutAction}>Log out</button>
+      <button onClick={LogOutAction} className="logOutbutton">
+        Log out
+      </button>
     </div>
   )
 }

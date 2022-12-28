@@ -1,9 +1,9 @@
-import axios from "axios"
+import axios from "../api/axios"
 // READ ME: fix the expiry date of the new token
 
 async function GetRefreshToken(refreshToken) {
   try {
-    const res = await axios.post("https://api.thegagali.com/refresh", {
+    const res = await axios.post("/refresh", {
       refreshToken: refreshToken,
     })
     console.log("res.data, ", res.data)

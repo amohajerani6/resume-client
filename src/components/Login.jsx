@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { Link, useNavigate } from "react-router-dom"
-import axios from "axios"
+import axios from "../api/axios"
 
 function Login() {
   var token = localStorage.getItem("token")
@@ -29,7 +29,7 @@ function Login() {
 
   function HandleLogin(event) {
     axios
-      .post("https://api.thegagali.com/login", loginData)
+      .post("/login", loginData)
       .then(function (response) {
         console.log("successfully logged in")
         var token = response.data
